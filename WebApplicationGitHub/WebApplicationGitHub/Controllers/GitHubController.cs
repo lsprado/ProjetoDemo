@@ -12,6 +12,7 @@ namespace WebApplicationGitHub.Controllers
         public ActionResult Index()
         {
             // Alteracao 1
+            // Alteracao 2
             return View();
         }
 
