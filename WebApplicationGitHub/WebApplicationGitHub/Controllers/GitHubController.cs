@@ -19,6 +19,7 @@ namespace WebApplicationGitHub.Controllers
         // GET: GitHub/Details/5
         public ActionResult Details(int id)
         {
+            // ateracao 3
             return View();
         }
 
