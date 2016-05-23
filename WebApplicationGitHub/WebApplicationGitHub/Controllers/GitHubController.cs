@@ -11,6 +11,7 @@ namespace WebApplicationGitHub.Controllers
         // GET: GitHub
         public ActionResult Index()
         {
+            // Alteracao 1
             return View();
         }
 
