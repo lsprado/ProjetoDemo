@@ -20,6 +20,7 @@ namespace WebApplicationGitHub.Controllers
         public ActionResult Details(int id)
         {
             // ateracao 3
+            // build automatico
             return View();
         }
 
