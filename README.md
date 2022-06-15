@@ -101,6 +101,25 @@ az webapp deployment list-publishing-profiles --resource-group $rgName --name wa
 
 ![Deploy](./images/img_gh_action_deploy.png)
 
+
+# Running the application using Docker
+
+1. Generate docker images
+```powershell
+cd .\src\
+docker build -t projetodemo.webapp -f  .\ProjetoDemo.WebApp\Dockerfile .
+docker build -t projetodemo.webapi -f  .\ProjetoDemo.WebApi\Dockerfile .
+```
+
+2. Docker compose
+
+```powershell
+cd .\src\
+docker-compose -f .\docker-compose.yml up
+```
+
+![Solution](./images/img_docker_compose.png)
+
 # Contribute
 Let me know and I'll be glad to invite you !!!, then ...
 

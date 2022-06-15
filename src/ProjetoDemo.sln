@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoDemo.UnitTest", "ProjetoDemo.UnitTest\ProjetoDemo.UnitTest.csproj", "{DA5A651E-E64B-4241-8C8C-E2889B96D3B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoDemo.UnitTest", "ProjetoDemo.UnitTest\ProjetoDemo.UnitTest.csproj", "{DA5A651E-E64B-4241-8C8C-E2889B96D3B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoDemo.WebApi", "ProjetoDemo.WebApi\ProjetoDemo.WebApi.csproj", "{022C6F84-1601-49C4-8A4A-F72B03DE6180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoDemo.WebApi", "ProjetoDemo.WebApi\ProjetoDemo.WebApi.csproj", "{022C6F84-1601-49C4-8A4A-F72B03DE6180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoDemo.WebApp", "ProjetoDemo.WebApp\ProjetoDemo.WebApp.csproj", "{6C2FE8ED-CDCF-4FA9-B4B8-6FA484CA847A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoDemo.WebApp", "ProjetoDemo.WebApp\ProjetoDemo.WebApp.csproj", "{6C2FE8ED-CDCF-4FA9-B4B8-6FA484CA847A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BDB428DF-D1F9-49E5-A2B9-766181F6182C}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

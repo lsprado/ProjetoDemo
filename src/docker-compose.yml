@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+  projetodemo.webapp:
+    container_name: projetodemo.webapp
+    image: projetodemo.webapp
+    build:
+      context: ProjetoDemo.WebApp
+      dockerfile: Dockerfile
+    environment:
+      - Services__Url=http://projetodemo.webapi
+    ports:
+      - 7171:80
+    links:
+      - projetodemo.webapi
+    depends_on:
+      - projetodemo.webapi
+  
+  projetodemo.webapi:
+    container_name: projetodemo.webapi
+    image: projetodemo.webapi
+    build:
+      context: ProjetoDemo.WebApi
+      dockerfile: Dockerfile
+    ports:
+      - 7272:80
