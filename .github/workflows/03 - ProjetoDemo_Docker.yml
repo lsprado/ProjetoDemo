@@ -21,18 +21,18 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       
-      - name: Directory
+      - name: List variables
         run: |
           echo "The default working directory on the runner, it's $GITHUB_WORKSPACE"
           echo "RUN Id = $GITHUB_RUN_ID"
           echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
           ls $GITHUB_WORKSPACE
 
-      - name: Docker Build and Push
+      - name: Docker Build and Push - WebApp
         run: |
           cd ./src/
           docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER -t ${{ env.ACR_SERVER }}/projetodemo.webapp:latest -f ProjetoDemo.WebApp/Dockerfile .
-          docker push ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER
+          docker push --all-tags ${{ env.ACR_SERVER }}/projetodemo.webapp
 
   release:
     needs: build
