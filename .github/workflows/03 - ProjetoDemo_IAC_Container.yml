@@ -8,7 +8,7 @@ env:
   AZ_RG_NAME: 'rg-MyProjectDemo'
   AZ_LOCATION: 'eastus'
   AZ_PLAN_SKU: 'S1'
-  AZ_SERVICE_PLAN: 'asp-MyProjectDemoContainer'
+  AZ_SERVICE_PLAN: 'asp-MyProjectDemo-Container'
   AZ_APP_NAME: 'capp-MyProjectDemo-app'
   AZ_API_NAME: 'capp-MyProjectDemo-api'
   AZ_ACR_NAME: 'acrprojetodemo'
