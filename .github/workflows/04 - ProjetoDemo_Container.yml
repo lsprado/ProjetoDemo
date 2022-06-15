@@ -47,8 +47,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo 'release'
-
+      - name: List variables
+        run: |
+          echo "The default working directory on the runner, it's $GITHUB_WORKSPACE"
+          echo "RUN Id = $GITHUB_RUN_ID"
+          echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
+          ls $GITHUB_WORKSPACE
+          
       - uses: azure/webapps-deploy@v2.2.3
         name: Deploy API
         with:
