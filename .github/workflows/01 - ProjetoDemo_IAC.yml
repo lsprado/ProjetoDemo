@@ -6,6 +6,8 @@ on:
       - master
     paths:
       - 'iac/**'
+  # We also want to be able to run this manually from Github
+  workflow_dispatch:
   
 env:
   AZ_RG_NAME: 'rg-MyProjectDemo'

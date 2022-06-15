@@ -4,7 +4,9 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    branches: [ "master" ] 
+    branches: [ "master" ]
+  # We also want to be able to run this manually from Github
+  workflow_dispatch:
 
 env:
   CONFIGURATION: release
