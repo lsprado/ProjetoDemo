@@ -34,6 +34,10 @@ param dockerImageAndTagApi string
 param acrResourceGroup string = resourceGroup().name
 param acrSubscription string = subscription().subscriptionId
 
+var appServicePlanName = toLower(servicePlan)
+var appName = toLower(webAppName)
+var apiName = toLower(webApiName)
+
 // external ACR info
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2019-05-01' existing = {
   scope: resourceGroup(acrSubscription, acrResourceGroup)
@@ -41,7 +45,7 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2019-05-01' e
 }
 
 resource siteApp 'microsoft.web/sites@2020-06-01' = {
-  name: webAppName
+  name: appName
   location: location
   properties: {
     siteConfig: {
@@ -74,7 +78,7 @@ resource siteApp 'microsoft.web/sites@2020-06-01' = {
 }
 
 resource siteApi 'microsoft.web/sites@2020-06-01' = {
-  name: webApiName
+  name: apiName
   location: location
   properties: {
     siteConfig: {
@@ -103,7 +107,7 @@ resource siteApi 'microsoft.web/sites@2020-06-01' = {
 }
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
-  name: servicePlan
+  name: appServicePlanName
   location: location
   sku: {
     name: skuName
