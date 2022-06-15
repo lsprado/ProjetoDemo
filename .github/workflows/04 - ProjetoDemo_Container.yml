@@ -53,17 +53,17 @@ jobs:
           echo "RUN Id = $GITHUB_RUN_ID"
           echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
           ls $GITHUB_WORKSPACE
-          
+
       - uses: azure/webapps-deploy@v2.2.3
         name: Deploy API
         with:
           app-name: ${{ env.AZ_API_NAME_CONTAINER }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_API_CONTAINER }}
-          images: ${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER
+          images: ${{ env.ACR_SERVER }}/projetodemo.webapi:4
       
       - uses: azure/webapps-deploy@v2.2.3
         name: Deploy APP
         with:
           app-name: ${{ env.AZ_APP_NAME_CONTAINER }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_APP_CONTAINER }}
-          images: ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER
+          images: ${{ env.ACR_SERVER }}/projetodemo.webapp:4
