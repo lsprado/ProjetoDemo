@@ -67,7 +67,9 @@ jobs:
         with:
           app-name: ${{ env.AZ_API_NAME_CONTAINER }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_API_CONTAINER }}
-          images: '$imagemApi'
+          images: '${{ env.ACR_SERVER }}/projetodemo.webapp:$ImageTag'
+        env:
+          ImageTag: $GITHUB_RUN_NUMBER
       
       - uses: azure/webapps-deploy@v2.2.3
         name: Deploy APP
