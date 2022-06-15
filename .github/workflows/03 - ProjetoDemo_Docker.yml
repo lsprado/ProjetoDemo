@@ -32,6 +32,7 @@ jobs:
         run: |
           cd ./src/
           docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER -t ${{ env.ACR_SERVER }}/projetodemo.webapp:latest -f ProjetoDemo.WebApp/Dockerfile .
+          docker image ls
           docker push --all-tags ${{ env.ACR_SERVER }}/projetodemo.webapp
 
   release:
