@@ -1,10 +1,10 @@
 name: 02-ProjetoDemo_Build_Deploy
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  #push:
+  #  branches: [ "master" ]
+  #pull_request:
+  #  branches: [ "master" ]
   # We also want to be able to run this manually from Github
   workflow_dispatch:
 
