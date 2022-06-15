@@ -24,6 +24,14 @@ jobs:
       - name: Directory
         run: |
           echo "The default working directory on the runner, it's $GITHUB_WORKSPACE"
+          echo "The default working directory on the runner, it's $env:GITHUB_WORKSPACE"
+          
+          echo "RUN Id = $GITHUB_RUN_ID"
+          echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
+
+          echo "RUN Id = ${{ GITHUB.RUN.ID }}"
+          echo "RUN NUMBER = ${{ GITHUB.RUN.NUMBER }}"
+          
           ls $GITHUB_WORKSPACE
 
       - name: Docker Build and Push
