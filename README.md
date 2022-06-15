@@ -124,6 +124,8 @@ docker-compose -f .\docker-compose.yml up
 
 4. Run the GitHub Action __03-ProjetoDemo_Docker__ to build and push docker images do ACR
 
+![Solution](./images/img_acr.png)
+
 # Contribute
 Let me know and I'll be glad to invite you !!!, then ...
 
