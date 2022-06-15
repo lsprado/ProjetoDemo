@@ -1,0 +1,41 @@
+name: 03-ProjetoDemo_IAC_Container
+
+on:
+  # We also want to be able to run this manually from Github
+  workflow_dispatch:
+  
+env:
+  AZ_RG_NAME: 'rg-MyProjectDemo'
+  AZ_LOCATION: 'eastus'
+  AZ_PLAN_SKU: 'S1'
+  AZ_SERVICE_PLAN: 'asp-MyProjectDemoContainer'
+  AZ_APP_NAME: 'capp-MyProjectDemo-app'
+  AZ_API_NAME: 'capp-MyProjectDemo-api'
+  AZ_ACR_NAME: 'acrprojetodemo'
+  AZ_ACR_USER: 'acrprojetodemo'
+  AZ_ACR_IMG_API: 'projetodemo.webapi:latest'
+  AZ_ACR_IMG_APP: 'projetodemo.webapp:latest'
+
+jobs:
+  infra:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Azure Login
+      uses: Azure/login@v1.4.4
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Deploy Template
+      uses: Azure/arm-deploy@v1.0.8
+      with:
+        scope: resourcegroup
+        resourceGroupName: ${{ env.AZ_RG_NAME }}
+        template: iac/container-webapp.bicep
+        deploymentMode: Incremental
+        deploymentName: 'gh-actions'
+        parameters: webApiName=${{ env.AZ_API_NAME }} webAppName=${{ env.AZ_APP_NAME }} servicePlan=${{ env.AZ_SERVICE_PLAN }} skuName=${{ env.AZ_PLAN_SKU }} acrName=${{ env.AZ_ACR_NAME }} dockerUsername=${{ env.AZ_ACR_USER }} dockerImageAndTagApi=${{ env.AZ_ACR_IMG_API }} dockerImageAndTagApp=${{ env.AZ_ACR_IMG_APP }}
+        failOnStdErr: false
