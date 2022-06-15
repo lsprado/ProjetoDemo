@@ -50,9 +50,10 @@ jobs:
     steps:
       - name: Create variable
         run: |
-          echo "imagem=${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "imagemApi=${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+
       - name: Test variable
-        run: echo $imagem
+        run: echo $imagemApi
 
       - name: List variables
         run: |
@@ -66,11 +67,11 @@ jobs:
         with:
           app-name: ${{ env.AZ_API_NAME_CONTAINER }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_API_CONTAINER }}
-          images: '${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER'
+          images: $imagemApi
       
       - uses: azure/webapps-deploy@v2.2.3
         name: Deploy APP
         with:
           app-name: ${{ env.AZ_APP_NAME_CONTAINER }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_APP_CONTAINER }}
-          images: "${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER"
+          images: '${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER'
