@@ -1,3 +1,5 @@
+// az deployment group create --resource-group $rgName --template-file .\main.bicep --parameters servicePlan='asp-myprojectdemo' skuName='S1' webAppName='capp-MyProjectDemo-app' webApiName='capp-MyProjectDemo-api' acrName='acrprojetodemo'
+
 @description('Service Plan name')
 @minLength(3)
 param servicePlan string

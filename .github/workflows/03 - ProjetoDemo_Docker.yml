@@ -6,6 +6,8 @@ on:
 
 env:
   ACR_SERVER: 'acrprojetodemo.azurecr.io'
+  AZ_API_NAME_CONTAINER: 'capp-MyProjectDemo-api'
+  AZ_APP_NAME_CONTAINER: 'capp-MyProjectDemo-app'
 
 jobs:
   build:
@@ -47,16 +49,16 @@ jobs:
     steps:
       - run: echo 'release'
 
-      #- uses: azure/webapps-deploy@v2.2.3
-      #  name: Deploy API
-      #  with:
-      #    app-name: ${{ env.AZ_API_NAME }}
-      #    publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_API }}
-      #    package: api-artifact
+      - uses: azure/webapps-deploy@v2.2.3
+        name: Deploy API
+        with:
+          app-name: ${{ env.AZ_API_NAME_CONTAINER }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_API }}
+          images: ${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER
       
-      #- uses: azure/webapps-deploy@v2.2.3
-      #  name: Deploy APP
-      #  with:
-      #    app-name: ${{ env.AZ_APP_NAME }}
-      #    publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_APP }}
-      #    package: app-artifact
+      - uses: azure/webapps-deploy@v2.2.3
+        name: Deploy APP
+        with:
+          app-name: ${{ env.AZ_APP_NAME_CONTAINER }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_APP }}
+          images: ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER
