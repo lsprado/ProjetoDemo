@@ -1,0 +1,98 @@
+name: ProjetoDemo
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ] 
+
+env:
+  CONFIGURATION: release
+  AZ_APP_NAME: 'wapp-ProjetoDemo-app'
+  AZ_API_NAME: 'wapp-ProjetoDemo-api'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+    
+    - name: Restore
+      run: dotnet restore src/ProjetoDemo.sln
+    
+    - name: Build
+      run: dotnet build src/ProjetoDemo.sln --configuration ${{ env.CONFIGURATION }} --no-restore
+    
+    - name: Test
+      run: dotnet test src/ProjetoDemo.UnitTest/ProjetoDemo.UnitTest.csproj --no-restore
+      
+    - name: Publish APP
+      run: dotnet publish --configuration ${{ env.CONFIGURATION }} --output PublishApp src/ProjetoDemo.WebApp/ProjetoDemo.WebApp.csproj
+
+    - name: Publish API
+      run: dotnet publish --configuration ${{ env.CONFIGURATION }} --output PublishApi src/ProjetoDemo.WebApi/ProjetoDemo.WebApi.csproj
+    
+    - name: Upload APP results
+      uses: actions/upload-artifact@v2
+      with:
+        name: app
+        path: PublishApp
+    
+    - name: Upload API results
+      uses: actions/upload-artifact@v2
+      with:
+        name: api
+        path: PublishApi
+  
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: app
+          path: app-artifact
+      
+      - uses: actions/download-artifact@v2
+        with:
+          name: api
+          path: api-artifact
+      
+      #- name: Variable Substitution API
+      #  uses: microsoft/variable-substitution@v1
+      #  with:
+      #    files: api-artifact/appsettings.json
+      #  env:
+      #    ConnectionStrings.ContosoUniversityAPIContext: ${{ secrets.AZURE_CONTOSO_CONN_STRING }}
+      #    ApplicationInsights.ConnectionString: ${{ secrets.AZURE_CONTOSO_APP_INSIGHTS }}
+      
+      #- name: Variable Substitution APP
+      #  uses: microsoft/variable-substitution@v1
+      #  with:
+      #    files: app-artifact/appsettings.json
+      #  env:
+      #    Api.Address: https://${{ env.AZ_API_NAME }}.azurewebsites.net/
+      #    ApplicationInsights.ConnectionString: ${{ secrets.AZURE_CONTOSO_APP_INSIGHTS }}
+          
+      #- uses: azure/webapps-deploy@v2.2.3
+      #  name: Deploy API
+      #  with:
+      #    app-name: ${{ env.AZ_API_NAME }}
+      #    publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_API }}
+      #    package: api-artifact
+      
+      #- uses: azure/webapps-deploy@v2.2.3
+      #  name: Deploy APP
+      #  with:
+      #    app-name: ${{ env.AZ_APP_NAME }}
+      #    publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_APP }}
+      #    package: app-artifact
+      
