@@ -10,8 +10,8 @@ on:
 
 env:
   CONFIGURATION: release
-  AZ_APP_NAME: 'wapp-ProjetoDemo-app'
-  AZ_API_NAME: 'wapp-ProjetoDemo-api'
+  AZ_APP_NAME: 'wapp-MyProjectDemo-app'
+  AZ_API_NAME: 'wapp-MyProjectDemo-api'
 
 jobs:
   build:
