@@ -24,16 +24,14 @@ jobs:
       - name: Directory
         run: |
           echo "The default working directory on the runner, it's $GITHUB_WORKSPACE"
-                    
           echo "RUN Id = $GITHUB_RUN_ID"
           echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
-          
           ls $GITHUB_WORKSPACE
 
       - name: Docker Build and Push
         run: |
           cd ./src/
-          docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER -f ProjetoDemo.WebApp/Dockerfile .
+          docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER -t ${{ env.ACR_SERVER }}/projetodemo.webapp:latest -f ProjetoDemo.WebApp/Dockerfile .
           docker push ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER
 
   release:
