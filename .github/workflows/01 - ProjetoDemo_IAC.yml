@@ -16,7 +16,7 @@ env:
   AZ_SERVICE_PLAN: 'asp-MyProjectDemo'
   AZ_APP_NAME: 'wapp-MyProjectDemo-app'
   AZ_API_NAME: 'wapp-MyProjectDemo-api'
-
+  AZ_ACR_NAME: 'acr-ProjetoDemo'
 jobs:
   infra:
 
@@ -38,5 +38,5 @@ jobs:
         template: iac/main.bicep
         deploymentMode: Incremental
         deploymentName: 'gh-actions'
-        parameters: skuName=${{ env.AZ_PLAN_SKU }} servicePlan=${{ env.AZ_SERVICE_PLAN }} webAppName=${{ env.AZ_APP_NAME }} webApiName=${{ env.AZ_API_NAME }}
+        parameters: skuName=${{ env.AZ_PLAN_SKU }} servicePlan=${{ env.AZ_SERVICE_PLAN }} webAppName=${{ env.AZ_APP_NAME }} webApiName=${{ env.AZ_API_NAME }} acrName=${{ env.AZ_ACR_NAME }}
         failOnStdErr: false
