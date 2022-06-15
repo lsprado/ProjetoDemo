@@ -32,8 +32,13 @@ jobs:
         run: |
           cd ./src/
           docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER -t ${{ env.ACR_SERVER }}/projetodemo.webapp:latest -f ProjetoDemo.WebApp/Dockerfile .
-          docker image ls
           docker push --all-tags ${{ env.ACR_SERVER }}/projetodemo.webapp
+
+      - name: Docker Build and Push - WebApi
+        run: |
+          cd ./src/
+          docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER -t ${{ env.ACR_SERVER }}/projetodemo.webapi:latest -f ProjetoDemo.WebApi/Dockerfile .
+          docker push --all-tags ${{ env.ACR_SERVER }}/projetodemo.webapi
 
   release:
     needs: build
