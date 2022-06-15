@@ -24,6 +24,17 @@ This folder contains the bicep files to create Azure environments
 
 # Running the application locally
 
+1. Install .NET 6 - https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+
+2. Install Visual Studio Community or Visual Studio Code - https://visualstudio.microsoft.com/free-developer-offers/
+
+3. Open the solution file __src/ProjetoDemo.sln__
+
+4. Configure Visual Studio to run multiple projects. Right click in ProjetoDemo solution -> Properties -> Startup Project. Select the option __Multiple startup projects__ and select the projects __ProjetoDemo.WebApi__ and __ProjetoDemo.WebApp__
+
+![Solution](./images/img_vs.png)
+
+5. Run the application press F5
 
 # Publishing the app to Azure
 
