@@ -4,7 +4,7 @@ Demo project using dotnet core MVC application calling a rest API. This project 
 
 ![Demo Application](./images/img_app.png)
 
-The rest api is very simple, just a method to return weather forecast.
+The rest api is very simple, just a method to simulate the weather forecast.
 
 ![Demo Application](./images/img_api.png)
 
