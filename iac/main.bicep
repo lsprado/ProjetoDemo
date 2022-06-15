@@ -16,7 +16,7 @@ param webApiName string
 @description('Location for all resources')
 param location string = resourceGroup().location
 
-@description('The Runtime stack of current web app')
+@description('The Runtime stack')
 param linuxFxVersion string = 'DOTNETCORE|6.0'
 
 var appServicePlanName = toLower(servicePlan)
