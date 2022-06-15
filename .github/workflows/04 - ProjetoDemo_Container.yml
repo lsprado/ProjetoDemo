@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      -name: Create variable
+      - name: Create variable
         run: |
           echo "imagem=${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
       - name: Test variable
