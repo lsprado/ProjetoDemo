@@ -1,4 +1,4 @@
-name: ProjetoDemo
+name: 02-ProjetoDemo_Build_Deploy
 
 on:
   push:

@@ -1,0 +1,40 @@
+name: 01-ProjetoDemo_IAC
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'iac/**'
+  
+env:
+  AZ_RG_NAME: 'rg-MyProjectDemo'
+  AZ_LOCATION: 'eastus'
+  AZ_PLAN_SKU: 'S1'
+  AZ_SERVICE_PLAN: 'asp-MyProjectDemo'
+  AZ_APP_NAME: 'wapp-MyProjectDemo-app'
+  AZ_API_NAME: 'wapp-MyProjectDemo-api'
+
+jobs:
+  infra:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Azure Login
+      uses: Azure/login@v1.4.4
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Deploy Template
+      uses: Azure/arm-deploy@v1.0.8
+      with:
+        scope: resourcegroup
+        resourceGroupName: ${{ env.AZ_RG_NAME }}
+        template: iac/main.bicep
+        deploymentMode: Incremental
+        deploymentName: 'gh-actions'
+        parameters: skuName=${{ env.AZ_PLAN_SKU }} servicePlan=${{ env.AZ_SERVICE_PLAN }} webAppName=${{ env.AZ_APP_NAME }} webApiName=${{ env.AZ_API_NAME }}
+        failOnStdErr: false
