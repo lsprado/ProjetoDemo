@@ -20,10 +20,16 @@ jobs:
           login-server: ${{ env.ACR_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+      
+      - name: Directory
+        run: |
+          echo "The default working directory on the runner, it's $GITHUB_WORKSPACE"
+          ls $GITHUB_WORKSPACE
 
       - name: Docker Build and Push
         run: |
-          docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp -f ./src/ProjetoDemo.WebApp/Dockerfile .
+          cd ./src/
+          docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp -f ProjetoDemo.WebApp/Dockerfile .
           docker push ${{ env.ACR_SERVER }}/projetodemo.webapp
 
   release:
