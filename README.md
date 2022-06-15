@@ -104,14 +104,14 @@ az webapp deployment list-publishing-profiles --resource-group $rgName --name wa
 
 # Running the application using Docker
 
-1. Generate docker images
+1. Generate docker images locally
 ```powershell
 cd .\src\
 docker build -t projetodemo.webapp -f  .\ProjetoDemo.WebApp\Dockerfile .
 docker build -t projetodemo.webapi -f  .\ProjetoDemo.WebApi\Dockerfile .
 ```
 
-2. Docker compose
+2. Docker compose locally
 
 ```powershell
 cd .\src\
@@ -119,6 +119,10 @@ docker-compose -f .\docker-compose.yml up
 ```
 
 ![Solution](./images/img_docker_compose.png)
+
+3. Create GibHub secrets for ACR login and ACR password
+
+4. Run the GitHub Action __03-ProjetoDemo_Docker__ to build and push docker images do ACR
 
 # Contribute
 Let me know and I'll be glad to invite you !!!, then ...
