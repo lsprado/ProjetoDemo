@@ -1,0 +1,45 @@
+name: 03-ProjetoDemo_Docker
+
+on:
+  # We also want to be able to run this manually from Github
+  workflow_dispatch:
+
+env:
+  ACR_SERVER: 'acrprojetodemo.azurecr.io'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.ACR_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - run: |
+          docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp -f .\src\ProjetoDemo.WebApp\Dockerfile .
+          docker push ${{ env.ACR_SERVER }}/projetodemo.webapp
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      #- uses: azure/webapps-deploy@v2.2.3
+      #  name: Deploy API
+      #  with:
+      #    app-name: ${{ env.AZ_API_NAME }}
+      #    publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_API }}
+      #    package: api-artifact
+      
+      #- uses: azure/webapps-deploy@v2.2.3
+      #  name: Deploy APP
+      #  with:
+      #    app-name: ${{ env.AZ_APP_NAME }}
+      #    publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_APP }}
+      #    package: app-artifact
