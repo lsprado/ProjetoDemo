@@ -48,6 +48,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      -name: Create variable
+        run: |
+          echo "imagem=${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+      - name: Test variable
+        run: echo $imagem
+
       - name: List variables
         run: |
           echo "The default working directory on the runner, it's $GITHUB_WORKSPACE"
