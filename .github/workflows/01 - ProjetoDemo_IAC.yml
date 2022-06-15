@@ -16,7 +16,7 @@ env:
   AZ_SERVICE_PLAN: 'asp-MyProjectDemo'
   AZ_APP_NAME: 'wapp-MyProjectDemo-app'
   AZ_API_NAME: 'wapp-MyProjectDemo-api'
-  AZ_ACR_NAME: 'acr-ProjetoDemo'
+  AZ_ACR_NAME: 'acrProjetoDemo'
 jobs:
   infra:
 
