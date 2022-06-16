@@ -6,9 +6,8 @@ on:
 
 env:
   ACR_SERVER: 'acrprojetodemo.azurecr.io'
-  AZ_API_NAME_CONTAINER: 'capp-MyProjectDemo-api'
-  AZ_APP_NAME_CONTAINER: 'capp-MyProjectDemo-app'
-  CONTAINER_TAG: '$GITHUB_RUN_ID'
+  AZ_API_NAME_CONTAINER: 'capp-myprojectdemo-api'
+  AZ_APP_NAME_CONTAINER: 'capp-myprojectdemo-app'
 jobs:
   build:
 
@@ -67,9 +66,13 @@ jobs:
           echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
           ls $GITHUB_WORKSPACE
       
-      - name: Deploy AZ CLI
+      - name: Deploy AZ CLI - Api
         run: |
-          az webapp create --resource-group rg-MyProjectDemo --plan asp-myprojectdemo-container --name capp-myprojectdemo-api --deployment-container-image-name ${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER
+          az webapp create --resource-group rg-MyProjectDemo --plan asp-myprojectdemo-container --name ${{ env.AZ_API_NAME_CONTAINER }} --deployment-container-image-name ${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER
+
+      - name: Deploy AZ CLI - App
+        run: |
+          az webapp create --resource-group rg-MyProjectDemo --plan asp-myprojectdemo-container --name ${{ env.AZ_APP_NAME_CONTAINER }} --deployment-container-image-name ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER
 
       #- uses: azure/webapps-deploy@v2.2.3
       #  name: Deploy API
