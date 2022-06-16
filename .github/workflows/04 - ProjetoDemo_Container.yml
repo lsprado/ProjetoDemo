@@ -66,13 +66,17 @@ jobs:
           echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
           ls $GITHUB_WORKSPACE
       
+      #- name: Deploy AZ CLI - Api
+      #  run: |
+      #    az webapp create --resource-group rg-MyProjectDemo --plan asp-myprojectdemo-container --name ${{ env.AZ_API_NAME_CONTAINER }} --deployment-container-image-name ${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER
+
+      #- name: Deploy AZ CLI - App
+      #  run: |
+      #    az webapp create --resource-group rg-MyProjectDemo --plan asp-myprojectdemo-container --name ${{ env.AZ_APP_NAME_CONTAINER }} --deployment-container-image-name ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER
+
       - name: Deploy AZ CLI - Api
         run: |
-          az webapp create --resource-group rg-MyProjectDemo --plan asp-myprojectdemo-container --name ${{ env.AZ_API_NAME_CONTAINER }} --deployment-container-image-name ${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER
-
-      - name: Deploy AZ CLI - App
-        run: |
-          az webapp create --resource-group rg-MyProjectDemo --plan asp-myprojectdemo-container --name ${{ env.AZ_APP_NAME_CONTAINER }} --deployment-container-image-name ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER
+          az webapp config container set --name ${{ env.AZ_API_NAME_CONTAINER }} --resource-group rg-MyProjectDemo --docker-custom-image-name ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER --docker-registry-server-url ${{ env.ACR_SERVER }} --docker-registry-server-user ${{ secrets.REGISTRY_USERNAME }} --docker-registry-server-password ${{ secrets.REGISTRY_PASSWORD }}
 
       #- uses: azure/webapps-deploy@v2.2.3
       #  name: Deploy API
