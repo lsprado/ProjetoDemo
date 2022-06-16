@@ -48,6 +48,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.ACR_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
       - name: Create variable
         run: |
           echo "imagemApi=${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
@@ -61,7 +67,11 @@ jobs:
           echo "RUN Id = $GITHUB_RUN_ID"
           echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
           ls $GITHUB_WORKSPACE
-          
+      
+      #- name: Deploy AZ CLI
+      #  run: |
+      #    az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name <app-name> --deployment-container-image-name <azure-container-registry-name>.azurecr.io/mydockerimage:v1.0.0
+
       - uses: azure/webapps-deploy@v2.2.3
         name: Deploy API
         with:
