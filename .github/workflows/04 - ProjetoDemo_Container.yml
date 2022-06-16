@@ -48,11 +48,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: azure/docker-login@v1
+      - name: Azure Login
+        uses: Azure/login@v1.4.4
         with:
-          login-server: ${{ env.ACR_SERVER }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Create variable
         run: |
