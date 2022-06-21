@@ -15,4 +15,5 @@ jobs:
           echo "The default working directory on the runner, it's $GITHUB_WORKSPACE"
           echo "RUN Id = $GITHUB_RUN_ID"
           echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
+          echo "RUN ID = ${{ event.run_id }}"
           ls $GITHUB_WORKSPACE
