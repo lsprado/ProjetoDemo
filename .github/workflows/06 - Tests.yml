@@ -1,0 +1,18 @@
+name: 04-ProjetoDemo_Container
+
+on:
+  # We also want to be able to run this manually from Github
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: List variables
+        run: |
+          echo "The default working directory on the runner, it's $GITHUB_WORKSPACE"
+          echo "RUN Id = $GITHUB_RUN_ID"
+          echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
+          ls $GITHUB_WORKSPACE
