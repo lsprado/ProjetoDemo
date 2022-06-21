@@ -1,0 +1,92 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: projetodemowebapp-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: projetodemowebapp
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projetodemowebapp-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: projetodemowebapp
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: projetodemowebapp
+        tier: frontend
+    spec:
+      containers:
+        - name: projetodemowebapp
+          image: "acrprojetodemo.azurecr.io/projetodemo.webapp:latest"
+          env:
+            - name: Services__Url
+              value: "http://projetodemowebapi-svc.default.svc.cluster.local"
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              cpu: 250m
+            limits:
+              cpu: 500m
+      imagePullSecrets:
+        - name: mysecret-acr
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: projetodemowebapi-svc
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    app: projetodemowebapi
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projetodemowebapi-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: projetodemowebapi
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: projetodemowebapi
+        tier: backend
+    spec:
+      containers:
+        - name: projetodemowebapi
+          image: "acrprojetodemo.azurecr.io/projetodemo.webapi:latest"
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              cpu: 250m
+            limits:
+              cpu: 500m
+      imagePullSecrets:
+        - name: mysecret-acr

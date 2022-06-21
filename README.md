@@ -36,7 +36,7 @@ This folder contains the bicep files to create Azure environments
 
 5. Run the application press F5
 
-# Publishing the app to Azure
+# Publishing the app to Azure Web App
 
 If you want to publish this application to Azure using GitHub actions, follow these steps
 
@@ -102,7 +102,11 @@ az webapp deployment list-publishing-profiles --resource-group $rgName --name wa
 ![Deploy](./images/img_gh_action_deploy.png)
 
 
-# Running the application using Docker
+# Using Docker
+
+Other option is running this application using container Docker.
+
+# Running the application locally using Docker
 
 1. Generate docker images locally
 ```powershell
@@ -120,9 +124,13 @@ docker-compose -f .\docker-compose.yml up
 
 ![Solution](./images/img_docker_compose.png)
 
-3. Create GibHub secrets for ACR login and ACR password
+# Publishing the app to Azure Web App for Containers
 
-4. Run the GitHub Action __03-ProjetoDemo_Docker__ to build and push docker images do ACR
+1. Create GibHub secrets for ACR login and ACR password
+
+2. Runn the GH action 03-ProjetoDemo_IAC_Container to create the Azure Environment
+
+3. Run the GitHub Action __04-ProjetoDemo_Container__ to build and push docker images do ACR
 
 ![Solution](./images/img_acr.png)
 

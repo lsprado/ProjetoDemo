@@ -1,0 +1,71 @@
+name: 05-ProjetoDemo_AKS
+
+on:
+  # We also want to be able to run this manually from Github
+  workflow_dispatch:
+
+env:
+  ACR_SERVER: 'acrprojetodemo.azurecr.io'
+  AZ_RG_GROUP: 'rg-MyProjectDemo'
+  AKS_NAME: 'aksmyprojectdemo'
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.ACR_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Docker Build and Push - WebApp
+        run: |
+          cd ./src/
+          docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapp:$GITHUB_RUN_NUMBER -t ${{ env.ACR_SERVER }}/projetodemo.webapp:latest -f ProjetoDemo.WebApp/Dockerfile .
+          docker push --all-tags ${{ env.ACR_SERVER }}/projetodemo.webapp
+
+      - name: Docker Build and Push - WebApi
+        run: |
+          cd ./src/
+          docker build -t ${{ env.ACR_SERVER }}/projetodemo.webapi:$GITHUB_RUN_NUMBER -t ${{ env.ACR_SERVER }}/projetodemo.webapi:latest -f ProjetoDemo.WebApi/Dockerfile .
+          docker push --all-tags ${{ env.ACR_SERVER }}/projetodemo.webapi
+      
+      - name: Create Kubernetes Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: k8s
+          path: src/kubernetes-deployment.yml
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: k8s
+          path: k8s-artifact
+    
+      # Set the target AKS cluster. - https://github.com/marketplace/actions/deploy-to-kubernetes-cluster
+      - uses: Azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cluster-name: ${{ env.AKS_NAME }}
+          resource-group: ${{ env.AZ_RG_GROUP }}
+
+      - uses: Azure/k8s-create-secret@v1.1
+        with:
+          container-registry-url: ${{ env.ACR_SERVER }}
+          container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          secret-name: 'mysecret-acr'
+
+      - uses: Azure/k8s-deploy@v3.1
+        with:
+          action: deploy
+          manifests: k8s-artifact/kubernetes-deployment.yml
+          imagepullsecrets: mysecret-acr

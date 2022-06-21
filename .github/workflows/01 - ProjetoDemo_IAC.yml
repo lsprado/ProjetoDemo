@@ -12,11 +12,14 @@ on:
 env:
   AZ_RG_NAME: 'rg-MyProjectDemo'
   AZ_LOCATION: 'eastus'
-  AZ_PLAN_SKU: 'S1'
+  AZ_PLAN_SKU: 'F1'
   AZ_SERVICE_PLAN: 'asp-MyProjectDemo'
   AZ_APP_NAME: 'wapp-MyProjectDemo-app'
   AZ_API_NAME: 'wapp-MyProjectDemo-api'
   AZ_ACR_NAME: 'acrProjetoDemo'
+  AZ_AKS_NAME: 'aksMyProjectDemo'
+  AZ_AKS_USERNAME: 'leandro'
+  AZ_AKS_KEY: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD7N8ZXEi+08cUSEVfxrkUU6jfwSQgcDxGEGdxWAz4hYHkHnv7qC+Xe2mvSitmSxUTXjVBprCGsKxvckAJl1xaeGKf0eC1gX+fVxcaAICy19MHYXE1ChTP+lqzRLeTqEGXLwOxWdrZgQmwITBza/9Yw7MHnc+VFN7xFolp0eG0cZMKMI3JyyJpODBBFZW0MTyMcHMVKzPMOo7Od7EUnK2+o/2bSOUkyc5b2qweKWparoEWUA7w5Zp9fOBL1cr9mRYFBhpnQkvgovbmSGgKn1XuN9DJRwlKDrr9o9SvKjSYIYgPEemMzivKhFUl4Okk3iOxuuQbhXSalFjpy9zvzRMl7 southamerica\\leadro@leadro-2021'
 jobs:
   infra:
 
@@ -38,5 +41,5 @@ jobs:
         template: iac/main.bicep
         deploymentMode: Incremental
         deploymentName: 'gh-actions'
-        parameters: skuName=${{ env.AZ_PLAN_SKU }} servicePlan=${{ env.AZ_SERVICE_PLAN }} webAppName=${{ env.AZ_APP_NAME }} webApiName=${{ env.AZ_API_NAME }} acrName=${{ env.AZ_ACR_NAME }}
+        parameters: skuName=${{ env.AZ_PLAN_SKU }} servicePlan=${{ env.AZ_SERVICE_PLAN }} webAppName=${{ env.AZ_APP_NAME }} webApiName=${{ env.AZ_API_NAME }} acrName=${{ env.AZ_ACR_NAME }} aksClusterName=${{ env.AZ_AKS_NAME }} dnsPrefix=${{ env.AZ_AKS_NAME }} linuxAdminUsername=${{ env.AZ_AKS_USERNAME }}
         failOnStdErr: false
