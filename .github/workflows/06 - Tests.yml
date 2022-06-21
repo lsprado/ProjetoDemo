@@ -1,4 +1,4 @@
-name: 04-ProjetoDemo_Container
+name: 06-Tests
 
 on:
   # We also want to be able to run this manually from Github
