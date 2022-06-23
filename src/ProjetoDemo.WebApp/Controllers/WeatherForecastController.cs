@@ -19,6 +19,7 @@ namespace ProjetoDemo.WebApp.Controllers
         // GET: WeatherForecastController
         public async Task<ActionResult> Index()
         {
+            // nova alteração
             try
             {
                 logger.LogInformation($"Method = {this.Request.Method} Path = {this.Request.Path}");
