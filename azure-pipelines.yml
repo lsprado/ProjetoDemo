@@ -15,19 +15,28 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: UseDotNet@2
+  displayName: Set dotnet version
+  inputs:
+    packageType: 'sdk'
+    version: '3.1.x'
 - task: DotNetCoreCLI@2
+  displayName: Restore
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
 - task: DotNetCoreCLI@2
+  displayName: Build
   inputs:
     command: 'build'
     projects: '**/*.csproj'
 - task: DotNetCoreCLI@2
+  displayName: Test
   inputs:
     command: 'test'
     projects: '**/ProjetoDemo.UnitTest.csproj'
 - task: DotNetCoreCLI@2
+  displayName: Publish
   inputs:
     command: 'publish'
     publishWebProjects: false
