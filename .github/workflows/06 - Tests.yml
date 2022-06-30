@@ -26,15 +26,12 @@ jobs:
         shell: pwsh
       
       - name: Run PowerShell Hello World script
-        if: github.event.action == 'inline'
         run: Write-Output 'Hello World!'
      
       - name: Run a multi-line PowerShell script
-        if: github.event.action == 'inline'
         run: |
           $psversiontable;
           Get-Process;
-          Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE;
 
       - uses: lsprado/gh-composite-action@main
         with:
