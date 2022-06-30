@@ -18,7 +18,7 @@ jobs:
           echo "RUN NUMBER = $GITHUB_RUN_NUMBER"
           ls $GITHUB_WORKSPACE
       
-      - uses: actions/gh-composite-action@v1
+      - uses: lsprado/gh-composite-action@v1
         with:
           int1: 2
           int2: 4
