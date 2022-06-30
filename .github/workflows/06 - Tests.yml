@@ -18,9 +18,6 @@ jobs:
           echo "RUN Id = $env:GITHUB_RUN_ID"
           echo "RUN NUMBER = $env:GITHUB_RUN_NUMBER"
         shell: pwsh
-      
-      - name: Environments
-        run: env
         
       - name: List dir
         run: |
