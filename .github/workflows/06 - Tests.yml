@@ -24,7 +24,7 @@ jobs:
       - name: List dir
         run: | 
           Write-Host $env:caminho
-          Get-ChildItem -Recurse -Path ${{ env.GITHUB_WORKSPACE }}
+          Get-ChildItem -Recurse -Path D:\a\ProjetoDemo\ProjetoDemo
         shell: pwsh
      
       - name: Run a multi-line PowerShell script
