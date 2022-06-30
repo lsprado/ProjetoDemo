@@ -22,8 +22,8 @@ jobs:
         run: env
         
       - name: List dir
-        run: | 
-          Write-Host $env:caminho
+        run: |
+          dir D:\a\ProjetoDemo\ProjetoDemo
           Get-ChildItem -Recurse -Path D:\a\ProjetoDemo\ProjetoDemo
         shell: pwsh
      
