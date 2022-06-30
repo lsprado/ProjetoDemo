@@ -16,7 +16,7 @@ jobs:
           echo "The default working directory on the runner, it's $env:GITHUB_WORKSPACE"
           echo "RUN Id = $env:GITHUB_RUN_ID"
           echo "RUN NUMBER = $env:GITHUB_RUN_NUMBER"
-          dir $env:GITHUB_WORKSPACE
+          ls $env:GITHUB_WORKSPACE
       
       - uses: lsprado/gh-composite-action@main
         with:
