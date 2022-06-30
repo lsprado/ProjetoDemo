@@ -25,5 +25,5 @@ jobs:
       
       - uses: lsprado/gh-composite-action@main
         with:
-          int1: 2
-          int2: 4
+          int1: 8
+          int2: 2
