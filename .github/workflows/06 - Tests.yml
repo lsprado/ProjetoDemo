@@ -18,19 +18,14 @@ jobs:
           echo "RUN NUMBER = $env:GITHUB_RUN_NUMBER"
         shell: pwsh
       
-      - name: test
+      - name: Environments
         run: env
         
       - name: List dir
         run: | 
           Write-Host $env:caminho
-          Get-ChildItem -Recurse -Path $env:caminho
+          Get-ChildItem -Recurse -Path ${{ env.GITHUB_WORKSPACE }}
         shell: pwsh
-        env:
-          caminho: $env:GITHUB_WORKSPACE
-      
-      - name: Run PowerShell Hello World script
-        run: Write-Output 'Hello World!'
      
       - name: Run a multi-line PowerShell script
         run: |
