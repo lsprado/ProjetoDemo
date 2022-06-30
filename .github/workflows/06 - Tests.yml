@@ -7,7 +7,8 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    #runs-on: windows-latest
+    runs-on: self-hosted
 
     steps:
       
@@ -23,11 +24,10 @@ jobs:
         
       - name: List dir
         run: |
-          dir D:\a\ProjetoDemo\ProjetoDemo
-          Get-ChildItem -Path "."
+          Get-ChildItem -Path $env:GITHUB_WORKSPACE
         shell: pwsh
      
-      - name: Run a multi-line PowerShell script
+      - name: Get Process
         run: |
           $psversiontable;
           Get-Process;
