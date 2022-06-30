@@ -16,16 +16,26 @@ jobs:
           echo "The default working directory on the runner, it's $env:GITHUB_WORKSPACE"
           echo "RUN Id = $env:GITHUB_RUN_ID"
           echo "RUN NUMBER = $env:GITHUB_RUN_NUMBER"
-          Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE
         shell: pwsh
       
       - name: test
         run: env
         
       - name: List dir
-        run: Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE
+        run: Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE;
         shell: pwsh
       
+      - name: Run PowerShell Hello World script
+        if: github.event.action == 'inline'
+        run: Write-Output 'Hello World!'
+     
+      - name: Run a multi-line PowerShell script
+        if: github.event.action == 'inline'
+        run: |
+          $psversiontable;
+          Get-Process;
+          Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE;
+
       - uses: lsprado/gh-composite-action@main
         with:
           int1: 8
