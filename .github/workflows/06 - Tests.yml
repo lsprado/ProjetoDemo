@@ -18,7 +18,10 @@ jobs:
           echo "RUN NUMBER = $env:GITHUB_RUN_NUMBER"
           Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE
         shell: pwsh
-          
+      
+      - name: test
+        run: env
+        
       - name: List dir
         run: Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE
         shell: pwsh
