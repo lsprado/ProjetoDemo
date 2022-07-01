@@ -6,12 +6,8 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
-    #runs-on: self-hosted
-
     steps:
-      
       - name: List variables
         run: |
           echo "The default working directory on the runner, it's $env:GITHUB_WORKSPACE"
@@ -19,17 +15,6 @@ jobs:
           echo "RUN Id = $env:GITHUB_RUN_ID"
           echo "RUN NUMBER = $env:GITHUB_RUN_NUMBER"
         shell: pwsh
-        
-      - name: List dir
-        run: |
-          Get-ChildItem -Path $env:GITHUB_WORKSPACE
-        shell: pwsh
-     
-      - name: Get Process
-        run: |
-          $psversiontable;
-          Get-Process;
-
       - uses: lsprado/gh-composite-action@main
         with:
           tipo: "teste"
