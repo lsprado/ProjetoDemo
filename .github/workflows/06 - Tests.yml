@@ -32,6 +32,6 @@ jobs:
 
       - uses: lsprado/gh-composite-action@main
         with:
+          type: 3
           int1: 8
           int2: 2
-          type: 3
