@@ -34,4 +34,4 @@ jobs:
         with:
           int1: 8
           int2: 2
-          type: 'teste'
+          type: 3
