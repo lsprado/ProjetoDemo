@@ -26,8 +26,8 @@ jobs:
           echo "RUN NUMBER = $env:GITHUB_RUN_NUMBER"
         shell: pwsh
       
-      #- uses: lsprado/gh-composite-action@main
-      #  with:
-      #    tipo: "producao"
-      #    int1: 8
-      #    int2: 2
+      - uses: ./.github/gh-composite-action
+        with:
+          tipo: "producao"
+          int1: 8
+          int2: 2
