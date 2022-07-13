@@ -14,7 +14,7 @@ jobs:
           repository: lsprado/gh-composite-action
           ref: main
           # Personal access token to check out private repository
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.COMPOSITE_TOKEN }}
           # Indicate where to check action out to
           path: .github/gh-composite-action
 
