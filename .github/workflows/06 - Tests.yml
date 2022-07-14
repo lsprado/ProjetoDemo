@@ -8,15 +8,21 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Get composite run steps repository
-        uses: actions/checkout@v2
-        with:
-          repository: lsprado/gh-composite-action
-          ref: main
-          # Personal access token to check out private repository
-          token: ${{ secrets.COMPOSITE_TOKEN }}
-          # Indicate where to check action out to
-          path: .github/gh-composite-action
+      #- name: Get composite run steps repository
+      #  uses: actions/checkout@v2
+      #  with:
+      #    repository: lsprado/gh-composite-action
+      #    ref: main
+      #    # Personal access token to check out private repository
+      #    token: ${{ secrets.COMPOSITE_TOKEN }}
+      #    # Indicate where to check action out to
+      #    path: .github/gh-composite-action
+
+      #- uses: ./.github/gh-composite-action
+      #  with:
+      #    tipo: "producao"
+      #    int1: 8
+      #    int2: 2
 
       - name: List variables
         run: |
@@ -26,7 +32,7 @@ jobs:
           echo "RUN NUMBER = $env:GITHUB_RUN_NUMBER"
         shell: pwsh
       
-      - uses: ./.github/gh-composite-action
+      - uses: lsprado/gh-composite-action@main
         with:
           tipo: "producao"
           int1: 8
