@@ -22,4 +22,5 @@ jobs:
           
       - name: Run after error
         if: ${{ failure() }}
-        run: echo Tratar o erro!
+        run: |
+          echo "Tratar o erro!"
