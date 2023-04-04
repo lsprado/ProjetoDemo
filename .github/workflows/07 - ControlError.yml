@@ -1,4 +1,4 @@
-name: ControlError
+name: 07 - ControlError
 
 on:
   workflow_dispatch:
