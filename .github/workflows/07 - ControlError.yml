@@ -10,15 +10,15 @@ jobs:
     steps:
 
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo "Hello, world!"
       
       - name: Run a error
-        run: ech Hello, world!
+        run: ech "Hello, world!"
 
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo "Add other actions to build"
+          echo "test, and deploy your project."
           
       - name: Run after error
         if: ${{ failure() }}
