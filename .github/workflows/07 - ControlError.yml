@@ -13,7 +13,7 @@ jobs:
         run: echo "Hello, world!"
       
       - name: Run a error
-        run: ech "Hello, world!"
+        run: echo "Hello, world!"
 
       - name: Run a multi-line script
         run: |
