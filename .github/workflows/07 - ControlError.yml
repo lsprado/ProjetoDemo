@@ -19,3 +19,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+      - name: Run after error
+        if: ${{ failure() }}
+        run: echo Tratar o erro!
