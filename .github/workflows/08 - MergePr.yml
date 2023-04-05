@@ -26,9 +26,7 @@ jobs:
             })
             
             github.rest.pulls.merge({
-              owner: context.payload.repository.owner.login,
-              repo: context.payload.repository.name,
-              pull_number: ${{env.pull_request_number}},
+              pull_number: ${{env.pull_request_number}}
             })
             
           github-token: ${{secrets.WRITE_TOKEN}}
