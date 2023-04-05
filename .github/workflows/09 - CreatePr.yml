@@ -3,7 +3,7 @@ name: 09 - CreatePr
 on:
   push:
     branches:
-      - feature/*
+      - features/*
       
 jobs:
   create-pull-request:
