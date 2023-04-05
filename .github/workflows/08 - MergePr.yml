@@ -1,4 +1,4 @@
-name: "MergePr"
+name: "08 - MergePr"
 
 on:
   workflow_dispatch:
