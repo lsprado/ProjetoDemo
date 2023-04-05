@@ -26,6 +26,8 @@ jobs:
               ].join('\n')
             });
             
+            echo result
+            
             github.rest.issues.addLabels({
               owner,
               repo,
