@@ -1,19 +1,21 @@
 name: "MergePr"
 
 on:
-  workflow_run:
-    workflows: ["CI Build"]
-    types:
-      - completed
-
+  workflow_dispatch:
+    inputs:
+      pr-id:
+        required: true
+        type: string
+ 
 jobs:
   automerge:
+    
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/github-script@v5
         env:
-          pull_request_number: ${{ toJSON(github.event.workflow_run.pull_requests[0].number) }}
+          pull_request_number: ${{ github.event.inputs.pr-id }}
         with:
           script: |
             github.rest.pulls.createReview({
@@ -22,9 +24,11 @@ jobs:
               pull_number: ${{env.pull_request_number}},
               event: 'APPROVE'
             })
+            
             github.rest.pulls.merge({
               owner: context.payload.repository.owner.login,
               repo: context.payload.repository.name,
               pull_number: ${{env.pull_request_number}},
             })
+            
           github-token: ${{secrets.WRITE_TOKEN}}
