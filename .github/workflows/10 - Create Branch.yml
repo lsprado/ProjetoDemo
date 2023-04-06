@@ -2,22 +2,24 @@ name: 10-CreateBranch
 
 on:
   workflow_dispatch:
+    inputs:
+      branch-name:
+        required: true
+        type: string
+        default: 'features/teste-01'
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Create report file
-        run: date +%s > report.txt
         
       - name: Create Branch
         run: |
           echo "Create Branch"
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git checkout -b features/teste-01
+          git checkout -b ${{ github.event.inputs.branch-name }}
         shell: pwsh
       
       - name: Create file and push
@@ -26,5 +28,5 @@ jobs:
           date +%s > report.txt
           git add .
           git commit -m "Add file"
-          git push origin featues/teste-01
+          git push origin ${{ github.event.inputs.branch-name }}
         shell: pwsh
