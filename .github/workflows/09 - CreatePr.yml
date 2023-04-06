@@ -15,7 +15,8 @@ jobs:
         with:
           script: |
             const { repo, owner } = context.repo;
-            const result = await github.rest.pulls.create({
+            
+            github.rest.pulls.create({
               title: '[Example] Simple demo',
               owner,
               repo,
@@ -36,6 +37,4 @@ jobs:
       
       - name: output
         run: |
-          echo "${{ steps.create-pr.outputs.id }}"
-          echo "${{ steps.create-pr.outputs.number }}"
-          echo "${{ steps.create-pr.outputs.state }}"
+          echo "${{ steps.create-pr.outputs.result }}"
