@@ -2,6 +2,8 @@
 feature-03
 feature-04
 novo teste 04
+teste
+
 Demo project using dotnet core MVC application calling a rest API. This project will be published on Azure WebApp.
 
 ![Demo Application](./images/img_app.png)
