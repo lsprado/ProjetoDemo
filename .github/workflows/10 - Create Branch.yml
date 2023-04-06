@@ -18,7 +18,6 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git checkout -b features/teste-01
-          git commit -m "Add changes" -a
         shell: pwsh
       
       - name: Create file and push
@@ -28,4 +27,3 @@ jobs:
           git commit -am "Add file"
           git push origin featues/teste-01
         shell: pwsh
-        
