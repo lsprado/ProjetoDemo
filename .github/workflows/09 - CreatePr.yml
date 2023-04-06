@@ -35,8 +35,12 @@ jobs:
               labels: ['feature', 'automated pr']
             });
             
-            echo "::set-output name=pr-number::$(result.data.number)"
+            github.rest.pulls.merge({
+              owner: context.payload.repository.owner.login,
+              repo: context.payload.repository.name,
+              pull_number: result.data.number
+            })
       
       - name: output
         run: |
-          echo "${{ steps.create-pr.outputs.pr-number }}"
+          echo "${{ steps.create-pr.outputs }}"
