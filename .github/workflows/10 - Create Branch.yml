@@ -24,6 +24,7 @@ jobs:
         run: |
           echo "Create Files and Push"
           date +%s > report.txt
-          git commit -am "Add file"
+          git add .
+          git commit -m "Add file"
           git push origin featues/teste-01
         shell: pwsh
