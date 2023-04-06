@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create Pull Request
+        id: create-pr
         uses: actions/github-script@v6
         with:
           script: |
@@ -32,3 +33,6 @@ jobs:
               issue_number: result.data.number,
               labels: ['feature', 'automated pr']
             });
+      
+      - name: output
+        run: echo "${{ steps.create-pr.outputs }}"
