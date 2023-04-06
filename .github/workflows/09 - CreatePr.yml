@@ -35,4 +35,7 @@ jobs:
             });
       
       - name: output
-        run: echo "${{ steps.create-pr.outputs }}"
+        run: |
+          echo "${{ steps.create-pr.outputs.id }}"
+          echo "${{ steps.create-pr.outputs.number }}"
+          echo "${{ steps.create-pr.outputs.state }}"
