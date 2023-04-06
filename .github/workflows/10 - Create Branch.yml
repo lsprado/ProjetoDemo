@@ -1,0 +1,31 @@
+name: 10-CreateBranch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Create report file
+        run: date +%s > report.txt
+        
+      - name: Create Branch
+        run: |
+          echo "Create Branch"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git checkout -b features/teste-01
+          git commit -m "Add changes" -a
+        shell: pwsh
+      
+      - name: Create file and push
+        run: |
+          echo "Create Files and Push"
+          date +%s > report.txt
+          git commit -am "Add file"
+          git push origin featues/teste-01
+        shell: pwsh
+        
