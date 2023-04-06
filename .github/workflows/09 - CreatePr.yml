@@ -16,7 +16,7 @@ jobs:
           script: |
             const { repo, owner } = context.repo;
             
-            github.rest.pulls.create({
+            const result = await github.rest.pulls.create({
               title: '[Example] Simple demo',
               owner,
               repo,
@@ -34,7 +34,9 @@ jobs:
               issue_number: result.data.number,
               labels: ['feature', 'automated pr']
             });
+            
+            echo "::set-output name=pr-number::$(result.data.number)"
       
       - name: output
         run: |
-          echo "${{ steps.create-pr.outputs.result }}"
+          echo "${{ steps.create-pr.outputs.pr-number }}"
